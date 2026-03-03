@@ -18,6 +18,9 @@ dependencies = [
     "numpy==2.3.5",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/mypkgs"]
+
 [build-system]
 # Require hatch-vcs alongside hatchling to enable Git tag versioning
 requires = ["hatchling", "hatch-vcs"]
