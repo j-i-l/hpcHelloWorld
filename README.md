@@ -1,6 +1,6 @@
-# HPC Hello World
+# Hello World Exercise
 
-This is a "Hello World" application designed to demonstrate the best practices for running Python workflows on an HPC Slurm cluster.
+This is a "Hello World" project written in python to demonstrate the best practices.
 
 ## Usage
 
