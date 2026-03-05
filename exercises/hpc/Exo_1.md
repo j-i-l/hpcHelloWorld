@@ -1,4 +1,4 @@
-# Exo 1: The HPC-Compatible Environment
+# HPC E1: The HPC-Compatible Environment
 
 We want to build a runtime environment that uses the exact Python version and dependencies declared in our `pyproject.toml`.
 
