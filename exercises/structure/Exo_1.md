@@ -31,7 +31,7 @@ However, this scripts has some issues we want to address here.
 
 - Separate configuration (Soc Pillar 2):  
   We do have some configuration data in this example. In particular, let's 
-  consider the actual course name we want ot use to filter peaple with as
+  consider the actual course name we want to use to filter people with as
   configuration data.
   
   In addition, note that actual key names of JSON data can also be
