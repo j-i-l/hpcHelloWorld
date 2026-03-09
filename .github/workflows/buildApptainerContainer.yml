@@ -41,7 +41,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            # The conditional directive is removed to force application
+            type=raw,value=latest
             type=sha,format=short
             # Use the SANITIZED version for the registry tag
             type=raw,value=${{ steps.scm.outputs.tag_version }}
