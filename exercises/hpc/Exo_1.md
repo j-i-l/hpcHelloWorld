@@ -30,17 +30,17 @@ Setting `s3cmdc` up on the Science Cluster basically boils down to:
 - Making it executable (optional)
   ```bash
   chmod +x s3cmdc
-  s3cmdc ~/.local/bin/
+  mv s3cmdc ~/.local/bin/
   ```
   _If you skip this step, you need to run `apptainer run s3cmdc ...` to use the `s3cmdc` container._
 
-In order to use `s3cmd` (or the containerized version provided in this course - [pSciComp/s3cmdContainer](https://github.com/pSciComp/s3cmdContainer) a valid configuration file is needed.  
+In order to use `s3cmd` (or the containerized version provided in this course) a valid configuration file is needed.  
 Usually, `s3cmdc` would take care of generating this file, if it does not exist. The only thing you would need to do is to provide the necessary access credentials to the Science Cloud API.  
 Unfortunately, on the Science Cluster we need to add this configuration file manually:
 
 > [!WARNING]
 > From the Science Cluster access to the Science Cloud API is blocked (or not configured properly) by internal network rules, making it impossible to use the `openstack` cli directly on the cluster.
-> Luckily, access to the Science Cloud Object Storage is possible.
+> Luckily, access to the Science Cloud Object Storage is still possible.
 > 
 > This means that we cannot simply let the `s3cmdc` container take care of fetching the access information necessary to communicate with the Object Storage:
 > We need to manually provide a valid `.s3cfg-apptainer` file for the `s3cmdc` command to work from the Science Cluster.  
@@ -76,9 +76,9 @@ Unfortunately, on the Science Cluster we need to add this configuration file man
 >   ```bash
 >   SECRET_KEY=$(openstack ec2 credentials show "${ACCESS_KEY}" -f value -c secret)
 >   ```
-> - Complete the `.s3cfg-apptainer file with the retrieved values and copy it to your home folder on the Science Cluster.
+> - Complete the `.s3cfg-apptainer` file with the retrieved values and copy it to your home folder on the Science Cluster.
 >
-> **Option 2: Automatically generate the file**
+> **Option 2: Automatically generate the file:**  
 > We can use the `s3cmdc` command to generate the `.s3cfg-apptainer` file for us:
 > - Make sure apptainer is installed.
 > - Fetch the `s3cmdc` container:
@@ -99,8 +99,8 @@ Unfortunately, on the Science Cluster we need to add this configuration file man
 **Tasks:**
 
 * Upload the locally built `.sif` binary to an S3-compatible object store.
-* Configure access credentials within the production environment.
-* Download the container binary from the object store to the cluster filesystem.
+* Configure access credentials within the production environment, aka make sure you have a valid `.s3cfg-apptainer` file in your home folder on the cluster.
+* Download the container binary from the object store to the cluster shared filesystem.
 
 ### 3. In-Situ Build on Production Infrastructure
 
@@ -117,14 +117,6 @@ While this method does not involve moving a pre-built binary, the image is gener
 srun --cpus-per-task=1 --mem=4G --time=00:20:00 --pty bash
 
 ```
-
-
-Alternatively, the environment can be initialized with the Apptainer module:
-```bash
-srun --cpus-per-task=1 --mem=4G --time=00:20:00 --pty bash -c "module load apptainer && bash"
-
-```
-
 
 * **Image Generation**: Once allocated to a compute node, load the required module and execute the build:
 ```bash
