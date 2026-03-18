@@ -48,7 +48,7 @@ Unfortunately, on the Science Cluster we need to add this configuration file man
 >
 > **Option 1: Manually create the config file**:  
 > The `.s3cfg-apptainer` file must look like this:
-> ```toml
+> ```ini
 > [default]
 > host_base = <the S3_HOST url>
 > host_bucket = %(host_base)s
@@ -65,7 +65,7 @@ Unfortunately, on the Science Cluster we need to add this configuration file man
 > - Fetch the `S3_HOST` url with:
 >   ```bash
 >   S3_HOST=$(openstack catalog show swift -f json -c endpoints | \
-              jq --raw-output '.endpoints[] | select(.interface | contains("public")) | .url' | \
+>             jq --raw-output '.endpoints[] | select(.interface | contains("public")) | .url' | \
 >             head -n 1 | sed 's|https://||' | cut -d'/' -f1)
 >   ```
 > - Fetch the `ACCESS_KEY` with:
