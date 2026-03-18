@@ -1,5 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=hello-parallel
+# Get the account with
+# sacctmgr show assoc user=<username> format=User,Account%50
+#SBATCH --account=<group.department.uni>
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
@@ -12,5 +15,5 @@ apptainer run \
   --env COURSE_ID=$SLURM_ARRAY_TASK_ID \
   --bind ./data/raw:/app/data/raw \
   --bind ./data/final:/app/data/final \
-  env-sif_latest.sif \
+  exohw-env_1.1.0.sif \
   python scripts/say_hello.py
