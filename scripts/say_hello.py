@@ -78,10 +78,10 @@ def main() -> None:
     #    - ready output location
     out_dir = prepare_output_dir(args.output_dir)
     # Determine what courses to process
-    if course_id is None:
+    if args.course_id is None:
         courses = cfg.all_courses
     else:
-        courses = [course_id]
+        courses = [args.course_id]
     # Create the greeting
     for course in courses:
         final_path = write_hello(people=people,
